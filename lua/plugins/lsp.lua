@@ -30,16 +30,16 @@ return {
             },
           },
         },
-        -- pylsp = {
-        --   plugins = {
-        --     rope_completion = {
-        --       enabled = true,
-        --     },
-        --     rope_autoimport = {
-        --       enabled = true,
-        --     },
-        --   },
-        -- },
+        pylsp = {
+          plugins = {
+            -- rope_completion = {
+            --   enabled = true,
+            -- },
+            rope_autoimport = {
+              enabled = true,
+            },
+          },
+        },
       },
     },
   },

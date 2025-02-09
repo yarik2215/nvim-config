@@ -19,7 +19,7 @@ return {
       --   api_key_name = "DEEPSEEK_API_KEY", -- default OPENAI_API_KEY if not set
       -- },
       -- DEEPSEEK LOCAL
-      provider = "openrouter",
+      provider = "l_gemini",
       vendors = {
         ollama = {
           __inherited_from = "openai",
@@ -28,12 +28,18 @@ return {
           model = "qwenlocal",
           -- model = "deepseek-coder-v2:16b",
         },
-        openrouter = {
+        l_gemini = {
           __inherited_from = "openai",
           api_key_name = "OPENROUTER_API_KEY",
           endpoint = "https://openrouter.ai/api/v1",
-          -- model = "qwen/qwen-2.5-coder-32b-instruct",
-          model = "deepseek/deepseek-r1-distill-qwen-32b",
+          model = "google/gemini-flash-1.5",
+        },
+        l_qwen = {
+          __inherited_from = "openai",
+          api_key_name = "OPENROUTER_API_KEY",
+          endpoint = "https://openrouter.ai/api/v1",
+          -- model = "deepseek/deepseek-r1-distill-qwen-32b",
+          model = "qwen/qwen-2.5-coder-32b-instruct",
         },
       },
     },
