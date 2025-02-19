@@ -14,7 +14,7 @@ return {
         "n",
         "<leader>dE",
         "",
-        { desc = "[D]ebug [C]ondition breakpoints", callback = set_exception_breakpoints }
+        { desc = "condition breakpoints", callback = set_exception_breakpoints }
       )
     end,
   },

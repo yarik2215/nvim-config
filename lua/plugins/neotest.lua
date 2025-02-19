@@ -3,14 +3,6 @@ return {
     "nvim-neotest/neotest",
     dependencies = { "nvim-neotest/nvim-nio", "nvim-treesitter/nvim-treesitter" },
     opts = {
-      -- floatin = {
-      --   options = {
-      --     focus = true,
-      --   },
-      -- },
-      -- status = {
-      --   virtual_text = false,
-      -- },
       adapters = {
         ["neotest-python"] = {
           -- args = { "--log-level", "DEBUG", "-s" },
