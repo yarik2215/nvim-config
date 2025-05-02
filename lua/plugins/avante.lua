@@ -15,11 +15,9 @@ return {
       --   timeout = 30000, -- Timeout in milliseconds
       --   temperature = 0,
       --   max_tokens = 4096,
-      --   -- optional
       --   api_key_name = "DEEPSEEK_API_KEY", -- default OPENAI_API_KEY if not set
       -- },
-      -- DEEPSEEK LOCAL
-      provider = "l_gemini",
+      provider = "l_gemini_2_5",
       vendors = {
         ollama = {
           __inherited_from = "openai",
@@ -28,11 +26,18 @@ return {
           model = "qwenlocal",
           -- model = "deepseek-coder-v2:16b",
         },
+
         l_gemini = {
           __inherited_from = "openai",
           api_key_name = "OPENROUTER_API_KEY",
           endpoint = "https://openrouter.ai/api/v1",
-          model = "google/gemini-flash-1.5",
+          model = "google/gemini-2.0-flash-001",
+        },
+        l_gemini_2_5 = {
+          __inherited_from = "openai",
+          api_key_name = "OPENROUTER_API_KEY",
+          endpoint = "https://openrouter.ai/api/v1",
+          model = "google/gemini-2.5-flash-preview",
         },
         l_qwen = {
           __inherited_from = "openai",
@@ -41,12 +46,30 @@ return {
           -- model = "deepseek/deepseek-r1-distill-qwen-32b",
           model = "qwen/qwen-2.5-coder-32b-instruct",
         },
+        -- test models
+        l_glm = {
+          __inherited_from = "openai",
+          api_key_name = "OPENROUTER_API_KEY",
+          endpoint = "https://openrouter.ai/api/v1",
+          model = "thudm/glm-z1-32b:free",
+          openai = {
+            data_collection = false,
+          },
+        },
+        l_llama = {
+          __inherited_from = "openai",
+          api_key_name = "OPENROUTER_API_KEY",
+          endpoint = "https://openrouter.ai/api/v1",
+          -- model = "deepseek/deepseek-r1-distill-qwen-32b",
+          model = "meta-llama/llama-4-maverick",
+        },
       },
     },
     -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
     build = "make",
     -- build = "powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false" -- for windows
     dependencies = {
+      "nvim-treesitter/nvim-treesitter",
       "stevearc/dressing.nvim",
       "nvim-lua/plenary.nvim",
       "MunifTanjim/nui.nvim",
