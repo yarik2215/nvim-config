@@ -42,3 +42,61 @@ vim.keymap.del({ "n", "v", "i" }, "<M-k>")
 --   "<cmd>lua require('dap').set_exception_breakpoints()<CR>",
 --   { desc = "break on exception" }
 -- )
+
+local function get_full_symbol_path()
+  local params = { textDocument = vim.lsp.util.make_text_document_params() }
+  vim.lsp.buf_request(0, "textDocument/documentSymbol", params, function(err, result, _, _)
+    if err or not result then
+      print("No symbols found")
+      return
+    end
+
+    local function cursor_in_range(range)
+      local row, col = unpack(vim.api.nvim_win_get_cursor(0))
+      row = row - 1
+      local start = range.start
+      local finish = range["end"]
+
+      if row < start.line or row > finish.line then
+        return false
+      elseif row == start.line and col < start.character then
+        return false
+      elseif row == finish.line and col > finish.character then
+        return false
+      end
+      return true
+    end
+
+    local path_parts = {}
+
+    local function find_symbol(symbols)
+      for _, sym in ipairs(symbols) do
+        if cursor_in_range(sym.range or sym.location.range) then
+          table.insert(path_parts, sym.name)
+          if sym.children then
+            find_symbol(sym.children)
+          end
+        end
+      end
+    end
+
+    find_symbol(result)
+
+    if #path_parts == 0 then
+      print("No symbol found under cursor")
+      return
+    end
+
+    -- Use expand() instead of nvim_buf_get_name
+    local file_path = vim.fn.expand("%:p")
+    local rel_path = vim.fn.fnamemodify(file_path, ":~:.")
+    local module_path = rel_path:gsub("%.py$", ""):gsub("[/\\]", ".")
+
+    local full_path = module_path .. "." .. table.concat(path_parts, ".")
+    vim.fn.setreg("+", full_path)
+    print("Copied: " .. full_path)
+  end)
+end
+
+-- Copy symbol path
+vim.keymap.set("n", "<leader>cP", get_full_symbol_path, { desc = "Copy path to symbol under cursor" })

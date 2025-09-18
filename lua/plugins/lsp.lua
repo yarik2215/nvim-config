@@ -34,18 +34,39 @@ return {
             },
           },
         },
-        -- docs
+        gleam = {},
+        ruby_lsp = {
+          init_options = {
+            formatter = "standard", -- Or "rubocop", etc.
+            linters = { "standard" }, -- Or { "rubocop", "reek" }, etc.
+            addonSettings = {
+              ["Ruby LSP Rails"] = {
+                enablePendingMigrationsPrompt = false, -- Example: disable Rails-specific prompt
+              },
+            },
+          },
+        },
+        -- ty type checker
+        ty = {
+          enabled = true,
+          settings = {},
+        },
+        -- ruff linter / formater
         ruff = {
           enabled = true,
           -- mason = false,
           init_options = {
             settings = {
-              config = "pyproject.toml",
+              -- config = "pyproject.toml",
               configurationPreference = "filesystemFirst",
-              -- lineLength = 100,
+              -- lineLength = 128,
               logLevel = "warn",
               fixAll = true,
               showSyntaxErrors = true,
+              lint = {
+                enabled = true,
+                preview = true,
+              },
               codeAction = {
                 disableRuleComment = {
                   enable = true,
