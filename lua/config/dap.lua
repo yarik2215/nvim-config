@@ -80,3 +80,19 @@ table.insert(dap.configurations.python, {
   justMyCode = false,
   cwd = "${workspaceFolder}",
 })
+table.insert(dap.configurations.python, {
+  name = "celery",
+  type = "debugpy",
+  request = "launch",
+  module = "celery",
+  args = function()
+    local args_string = vim.fn.input("Arguments: ")
+    local utils = require("dap.utils")
+    if utils.splitstr and vim.fn.has("nvim-0.10") == 1 then
+      return utils.splitstr(args_string)
+    end
+    return vim.split(args_string, " +")
+  end,
+  justMyCode = false,
+  cwd = "${workspaceFolder}",
+})

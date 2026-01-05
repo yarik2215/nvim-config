@@ -15,6 +15,7 @@ return {
         -- PERF = { icon = " ", alt = { "OPTIM", "PERFORMANCE", "OPTIMIZE" } },
         NOTE = { icon = " ", color = "hint", alt = { "INFO" } },
         DEPR = { icon = " ", color = "warning", alt = { "DEPRECATED" } },
+        AI = { icon = " ", color = "#8A35B2" },
       },
     },
   },

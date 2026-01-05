@@ -1,8 +1,9 @@
 return {
+  { "morhetz/gruvbox" },
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "tokyonight",
+      colorscheme = "tokyonight-moon",
     },
   },
 }

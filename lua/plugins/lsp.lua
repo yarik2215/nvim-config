@@ -34,18 +34,20 @@ return {
             },
           },
         },
-        gleam = {},
-        ruby_lsp = {
-          init_options = {
-            formatter = "standard", -- Or "rubocop", etc.
-            linters = { "standard" }, -- Or { "rubocop", "reek" }, etc.
-            addonSettings = {
-              ["Ruby LSP Rails"] = {
-                enablePendingMigrationsPrompt = false, -- Example: disable Rails-specific prompt
-              },
-            },
-          },
+        gleam = {
+          enabled = true,
         },
+        -- ruby_lsp = {
+        --   init_options = {
+        --     formatter = "standard", -- Or "rubocop", etc.
+        --     linters = { "standard" }, -- Or { "rubocop", "reek" }, etc.
+        --     addonSettings = {
+        --       ["Ruby LSP Rails"] = {
+        --         enablePendingMigrationsPrompt = false, -- Example: disable Rails-specific prompt
+        --       },
+        --     },
+        --   },
+        -- },
         -- ty type checker
         ty = {
           enabled = true,
@@ -103,8 +105,8 @@ return {
     "stevearc/conform.nvim",
     opts = {
       formatters_by_ft = {
-        -- python = { "ruff" },
-        python = { "black" },
+        python = { "ruff" },
+        -- python = { "black" },
       },
     },
   },
