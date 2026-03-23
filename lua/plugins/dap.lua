@@ -2,7 +2,12 @@ return {
   {
     "mfussenegger/nvim-dap",
     opts = {},
+    config = function()
+      -- Load custom DAP configurations
+      require("config.dap")
+    end,
   },
+  { "nvim-dap-virtual-text", enabled = false },
   {
     "lucaSartore/nvim-dap-exception-breakpoints",
     dependencies = { "mfussenegger/nvim-dap" },

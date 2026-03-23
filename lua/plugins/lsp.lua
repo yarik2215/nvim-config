@@ -1,15 +1,10 @@
 return {
-  -- { "williamboman/mason.nvim", enabled = false, opts = { ensure_installed = {} } },
+  -- Note: Mason, mason-lspconfig, and mason-nvim-dap are handled by LazyVim defaults.
+  -- If you need to disable them or customize further, uncomment and configure below:
+  -- { "williamboman/mason.nvim", enabled = false },
+  -- { "williamboman/mason-lspconfig.nvim", enabled = false },
   -- { "williamboman/mason-nvim-dap.nvim", enabled = false },
-  -- {
-  --   "williamboman/mason-lspconfig.nvim",
-  --   enabled = false,
-  --   opts = {
-  --     ensure_installed = {},
-  --     automatic_installation = false, -- Disable auto setup of LSPs entirely
-  --     handlers = {},
-  --   },
-  -- },
+
   {
     "neovim/nvim-lspconfig",
     opts = {
@@ -18,18 +13,19 @@ return {
         virtual_text = false,
       },
       servers = {
-        -- pyright will be automatically installed with mason and loaded with lspconfig
-        -- docs:
         pyright = {
+          enabled = false,
+        },
+        -- basedpyright is a fork of pyright with better type inference and features
+        basedpyright = {
           enabled = true,
           settings = {
-            python = {
+            basedpyright = {
               analysis = {
                 typeCheckingMode = "standard",
                 autoSearchPaths = true,
                 useLibraryCodeForTypes = true,
-                disableOrganizeImports = true,
-                diagnosticMode = "openFilesOnly", -- Limit diagnostics to open files only (reducing noise)
+                diagnosticMode = "openFilesOnly",
               },
             },
           },
@@ -50,8 +46,18 @@ return {
         -- },
         -- ty type checker
         ty = {
-          enabled = true,
-          settings = {},
+          enabled = false,
+          settings = {
+            ty = {
+              completions = {
+                autoImport = true,
+              },
+              inlayHints = {
+                variableTypes = true,
+                callArgumentNames = true,
+              },
+            },
+          },
         },
         -- ruff linter / formater
         ruff = {
@@ -89,7 +95,7 @@ return {
             pylsp = {
               plugins = {
                 pylint = {
-                  enabled = true,
+                  enabled = false,
                   -- executable = "~/.local/bin/pylint", -- Adjust path if necessary
                 },
                 rope_autoimport = { enabled = true },
